@@ -45,9 +45,9 @@ class BeverageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Beverage $beverage)
     {
-        //
+        return view('beverages.show', compact('beverage'));
     }
 
     /**
