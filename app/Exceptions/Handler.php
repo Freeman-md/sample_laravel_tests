@@ -38,4 +38,13 @@ class Handler extends ExceptionHandler
             //
         });
     }
+    
+    public function report(Throwable $e)
+    {
+        if (app()->environment() == 'testing') {
+            throw $e;
+        }
+
+        parent::report($e);
+    }
 }
