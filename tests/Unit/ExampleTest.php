@@ -2,7 +2,8 @@
 
 namespace Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
+use App\Models\User;
+use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
@@ -14,5 +15,12 @@ class ExampleTest extends TestCase
     public function testBasicTest()
     {
         $this->assertTrue(true);
+    }
+
+    /** @test */
+    public function user_has_age_attribute() {
+        $user = User::factory()->make();
+
+        $this->assertNotNull($user->age);
     }
 }

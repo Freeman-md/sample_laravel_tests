@@ -2,9 +2,11 @@
 
 namespace Tests\Unit;
 
+use Tests\TestCase;
+use App\Models\User;
 use App\Models\Beverage;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Tests\TestCase;
+use App\Exceptions\MinorCannotBuyAlcoholicBeverageException;
 
 class BeverageTest extends TestCase
 {
@@ -28,5 +30,24 @@ class BeverageTest extends TestCase
     public function beverage_has_type()
     {
         $this->assertNotEmpty($this->beverage->type);
+    }
+
+    /** @test */
+    public function a_minor_user_cannot_buy_alcoholic_beverage() {
+        
+        $beverage = Beverage::factory()->make([
+            'type' => 'Alcoholic'
+        ]);
+
+        $user = User::factory()->make([
+            'age' => 17
+        ]);
+        
+        $this->actingAs($user);
+
+        $this->expectException(MinorCannotBuyAlcoholicBeverageException::class);
+
+        $beverage->buy();
+
     }
 }

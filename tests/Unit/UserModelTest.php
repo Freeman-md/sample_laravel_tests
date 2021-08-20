@@ -20,6 +20,7 @@ class UserModelTest extends TestCase
         $user = User::create([
             'firstname' => 'John',
             'lastname' => 'Doe',
+            'age' => 17,
             'email' => 'new@gmail.com',
             'password' => 'secret'
         ]);
